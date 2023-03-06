@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "IntraMail": {
+    "Ballot": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -72,10 +72,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "IntraMail:build:production"
+              "browserTarget": "Ballot:build:production"
             },
             "development": {
-              "browserTarget": "IntraMail:build:development"
+              "browserTarget": "Ballot:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -83,7 +83,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "IntraMail:build"
+            "browserTarget": "Ballot:build"
           }
         },
         "test": {
@@ -108,5 +108,5 @@
       }
     }
   },
-  "defaultProject": "IntraMail"
+  "defaultProject": "Ballot"
 }
