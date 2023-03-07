@@ -8,3 +8,10 @@ body {
   font-family: satoshi;
   src: url('../src/assets/fonts/OTF/Satoshi-Regular.otf');
 }
+.btn-ballot {
+  background-color: #4F9A2A;
+  color: white !important
+}
+.text-ballot {
+  color: #4F9A2A !important
+}
