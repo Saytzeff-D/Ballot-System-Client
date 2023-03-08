@@ -2,9 +2,12 @@
 
 <div class="background py-5">
   <div class="d-flex justify-content-center">
-    <form class="col-md-5 border bg-white mx-md-0 mx-2 py-5" [formGroup]="registerForm" >
-      <p class="text-center h4 pt-2 text-ballot">Ballot Management System</p>
+    <form class="col-md-5 border bg-white mx-md-0 mx-2 pt-5 mt-4 rounded-lg shadow-lg" [formGroup]="registerForm" >
+      <p class="text-center h4 pt-2 text-ballot font-weight-bolder">Ballot Management System</p>
       <p class="text-center py-0 text-muted">Register here</p>
+      <div *ngIf="!loading && error !== ''" class="alert alert-danger font-weight-bold">
+        <span>{{error}}</span>
+      </div>
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Full Name</mat-label>
         <input matInput placeholder="Ngozi Ekenne" formControlName="fullName" />
@@ -34,7 +37,8 @@
         <mat-error *ngIf="registerForm.get('orgName')?.errors?.['required'] && registerForm.get('orgName')?.touched">Organization Name is <strong>required</strong></mat-error>
       </mat-form-field>
 
-      <button class="btn btn-ballot rounded-0 btn-block" (click)="register()">Continue</button>
+      <button [class]="loading ? 'btn btn-block text-ballot animate__animated animate__flash animate__infinte' : 'btn btn-ballot btn-block'" mat-raised-button (click)="register()" [disabled]="loading">{{loading ? 'Please wait...' : 'Continue'}}</button>
+      <p class="text-muted float-right py-2 font-weight-bolder">Have an account? <a href="/login" class="text-ballot">Login here</a></p>
     </form>
   </div>
 </div>
