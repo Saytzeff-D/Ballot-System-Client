@@ -15,3 +15,15 @@ body {
 .text-ballot {
   color: #4F9A2A !important
 }
+.bg-ballot {
+  background-color: #4F9A2A;
+  color: white !important;
+}
+.bg-ballot-match{
+  background-color: #041422;
+  color: white !important;
+}
+.btn-ballot-match{
+  background-color: #041422;
+  color: #4F9A2A !important;
+}
