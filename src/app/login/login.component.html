@@ -1,0 +1,28 @@
+<title>Ballot | Login</title>
+
+<div class="background py-5">
+  <div class="d-flex justify-content-center">
+    <form class="col-md-4 border bg-white mx-md-0 mx-2 pt-5 mt-4 px-5 pb-5 rounded-lg shadow-lg" [formGroup]="loginForm" >
+      <p class="text-center h4 pt-2 text-ballot font-weight-bolder">Ballot Management System</p>
+      <p class="text-center py-0 text-muted">Login here</p>
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Email Address</mat-label>
+        <input matInput placeholder="youremail@gmail.com" formControlName="email" />
+       <mat-error *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched">Email is <strong>required</strong></mat-error>
+       <mat-error *ngIf="loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched">Email is <strong>invalid</strong></mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-100">
+        <mat-label>Enter your password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" formControlName="password" >
+        <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">Password is <strong>required</strong></mat-error>
+      </mat-form-field>
+
+      <button class="btn btn-ballot btn-block" mat-raised-button (click)="login()">Login</button>
+      <p class="text-muted float-right py-2 font-weight-bolder">Don't have an account? <a href="/register" class="text-ballot">Create account</a></p>
+    </form>
+  </div>
+</div>
