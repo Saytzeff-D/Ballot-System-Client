@@ -10,13 +10,25 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterialModule } from './modules/material/material.module';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { UserComponent } from './user/user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { VotersComponent } from './voters/voters.component';
+import { BallotComponent } from './ballot/ballot.component';
+import { CreateElectionComponent } from './create-election/create-election.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LandingPageComponent,
-    RegisterComponent
+    RegisterComponent,
+    LoginComponent,
+    UserComponent,
+    DashboardComponent,
+    VotersComponent,
+    BallotComponent,
+    CreateElectionComponent
   ],
   imports: [
     BrowserModule,
