@@ -13,4 +13,8 @@ export class BackendService {
   register(value:any){
     return this.http.post(`${this.baseUrl}account/register`, value)
   }
+
+  login(value:any){
+    return this.http.post(`${this.baseUrl}account/login`, value)
+  }
 }
