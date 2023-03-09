@@ -5,6 +5,9 @@
     <form class="col-md-4 border bg-white mx-md-0 mx-2 pt-5 mt-4 px-5 pb-5 rounded-lg shadow-lg" [formGroup]="loginForm" >
       <p class="text-center h4 pt-2 text-ballot font-weight-bolder">Ballot Management System</p>
       <p class="text-center py-0 text-muted">Login here</p>
+      <div *ngIf="!loading && error !== ''" class="alert alert-danger font-weight-bold">
+        <span>{{error}}</span>
+      </div>
       <mat-form-field appearance="fill" class="w-100">
         <mat-label>Email Address</mat-label>
         <input matInput placeholder="youremail@gmail.com" formControlName="email" />
@@ -21,8 +24,26 @@
         <mat-error *ngIf="loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched">Password is <strong>required</strong></mat-error>
       </mat-form-field>
 
-      <button class="btn btn-ballot btn-block" mat-raised-button (click)="login()">Login</button>
-      <p class="text-muted float-right py-2 font-weight-bolder">Don't have an account? <a href="/register" class="text-ballot">Create account</a></p>
+      <button
+       [class]="loading
+       ?
+       'btn btn-block text-ballot animate__animated animate__flash animate__infinte'
+       :
+       'btn btn-ballot btn-block'"
+       mat-raised-button
+       (click)="login()"
+       [disabled]="loading"
+      >
+      {{loading ? 'Please wait...' : 'Login'}}
+      </button>
+      <p
+       class="text-muted float-right py-2 font-weight-bolder"
+      >
+        Don't have an account?
+        <a href="/register" class="text-ballot"
+        >Create account
+      </a>
+    </p>
     </form>
   </div>
 </div>
