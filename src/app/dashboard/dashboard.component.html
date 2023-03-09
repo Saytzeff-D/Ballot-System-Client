@@ -3,9 +3,9 @@
 
   <div class="no-election-created d-flex justify-content-center">
     <div class="text-center py-5 mt-5">
-      <p class="display-1">Hello, User!</p>
-      <p class="text-ballot h2">Welcome to the latest online voting software</p>
-      <button (click)="createElection()" class='btn btn-ballot-match font-weight-bold btn-lg' mat-raised-button><i class="fa fa-plus"></i> Create an Election</button>
+      <p class="display-1">Hello, {{orgName.split(' ')[0]}}!</p>
+      <p class="text-ballot lead display-5">Welcome to the latest online voting software</p>
+      <button (click)="createElection()" class='btn btn-ballot-match font-weight-bold btn-lg font-large' mat-raised-button><i class="fa fa-plus px-1 fa-lg"></i> Create an Election</button>
     </div>
   </div>
 

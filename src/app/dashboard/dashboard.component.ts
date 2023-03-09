@@ -3,6 +3,7 @@ import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateElectionComponent } from '../create-election/create-election.component';
+import { BehaviourService } from '../services/behaviour.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -30,13 +31,17 @@ export class DashboardComponent {
       ];
     })
   );
+  public orgName:any;
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog) {}
+  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog, public behaviorService: BehaviourService) {}
 
   ngOnInit(): void{
+    this.behaviorService.user.subscribe((user:any)=>{
+      this.orgName = user.orgName
+    })
   }
 
   createElection(): void{
-    this.dialog.open(CreateElectionComponent, {width: '350px'})
+    this.dialog.open(CreateElectionComponent, { width: '400px' })
   }
 }
