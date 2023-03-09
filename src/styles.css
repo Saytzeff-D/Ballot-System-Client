@@ -27,3 +27,7 @@ body {
   background-color: #041422;
   color: #4F9A2A !important;
 }
+.display-5 {
+  font-size: large;
+  font-weight: bold;
+}
