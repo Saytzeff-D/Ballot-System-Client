@@ -31,6 +31,7 @@ export class RegisterComponent implements OnInit {
       this.backend.register(this.registerForm.value).subscribe((res:any)=>{
         console.log(res)
         if (res.msg == 'Success') {
+          sessionStorage.setItem('user', JSON.stringify(res.data))
           this.router.navigate(['/account/dashboard'])
         } else {
           this.loading = false
