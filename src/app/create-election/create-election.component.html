@@ -1,12 +1,15 @@
 <form [formGroup]="createForm" >
-    <p>Create an Election<p>
+    <p class="h4">Create an Election<p>
+      <div *ngIf="!loading && error !== ''" class="alert alert-danger font-weight-bold">
+        <span>{{error}}</span>
+      </div>
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Election Title</mat-label>
-        <input matInput formControlName="title" />
+        <input matInput formControlName="title" class="font-weight-bold" />
       </mat-form-field>
       <mat-form-field appearance="outline" class="col-12">
         <mat-label>Start Date</mat-label>
-        <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Start Date" [min]="minDate" formControlName="startDate" class="font-weight-bold">
+        <input matInput [ngxMatDatetimePicker]="picker1" placeholder="Start Date" [min]="minDate" formControlName="start_date" class="font-weight-bold">
         <mat-datepicker-toggle matSuffix [for]="$any(picker1)"></mat-datepicker-toggle>
         <ngx-mat-datetime-picker #picker1 [showSeconds]="true" [showSpinners]="true"
            [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
@@ -15,12 +18,23 @@
      </mat-form-field>
      <mat-form-field appearance="outline" class="col-12">
       <mat-label>End Date</mat-label>
-      <input matInput [ngxMatDatetimePicker]="picker2" placeholder="End Date" [min]="minDate" formControlName="endDate" class="font-weight-bold">
+      <input matInput [ngxMatDatetimePicker]="picker2" placeholder="End Date" [min]="minDate" formControlName="end_date" class="font-weight-bold">
       <mat-datepicker-toggle matSuffix [for]="$any(picker2)"></mat-datepicker-toggle>
       <ngx-mat-datetime-picker #picker2 [showSeconds]="true" [showSpinners]="true"
          [stepHour]="1" [stepMinute]="1" [stepSecond]="1"
          [touchUi]="false" [enableMeridian]="false">
       </ngx-mat-datetime-picker>
    </mat-form-field>
-   <button mat-raised-button>Create</button>
+   <button
+       [class]="loading
+       ?
+       'btn btn-block text-ballot animate__animated animate__flash animate__infinte'
+       :
+       'btn btn-ballot-match font-weight-bold btn-block'"
+       mat-raised-button
+       (click)="create()"
+       [disabled]="loading"
+      >
+      {{loading ? 'Processing...' : 'Create Election'}}
+      </button>
 </form>
