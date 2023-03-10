@@ -19,3 +19,8 @@
 .dashboard-card-content {
   text-align: center;
 }
+.fab-btn{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}

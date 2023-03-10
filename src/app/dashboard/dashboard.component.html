@@ -1,7 +1,49 @@
 <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
+  <div class="d-flex justify-content-between">
+    <h1 class="mat-h1">Dashboard</h1>
+    <button (click)="createElection()" *ngIf="electionTray.length !== 0" mat-fab color="" class="btn-ballot-match font-weight-bolder mb-2">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
 
-  <div class="no-election-created d-flex justify-content-center">
+  <div *ngIf="loading">
+    <mat-spinner color="accent"></mat-spinner>
+  </div>
+
+  <div class="alert alert-danger" *ngIf="error !== '' && !loading">
+    <span><i class="fa fa-exclamation-triangle"></i> {{error}} </span>
+  </div>
+
+  <div *ngIf="electionTray.length !== 0">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Select an Election
+          </mat-panel-title>
+          <mat-panel-description>
+            No Election Selected
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <ul>
+          <li *ngFor="let i = index; let each of electionTray">
+            <div class="d-flex justify-content-between">
+              {{each.title}} 
+              <button 
+                (click)="selectElection(each.title)" 
+                mat-raised-button 
+                [class]="selected == each.title ? 'btn btn-ballot-match font-weight-bold mb-2': 'btn btn-ballot mb-2'"
+              >
+                {{selected == each.title ? 'Selected' : 'Select'}}
+              </button>
+            </div>
+          </li>
+        </ul>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
+
+  <div class="no-election-created d-flex justify-content-center" *ngIf="electionTray.length == 0 && !loading && error == ''">
     <div class="text-center py-5 mt-5">
       <p class="display-1">Hello, {{orgName.split(' ')[0]}}!</p>
       <p class="text-ballot lead display-5">Welcome to the latest online voting software</p>

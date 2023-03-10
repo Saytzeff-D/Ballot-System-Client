@@ -4,6 +4,7 @@ import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateElectionComponent } from '../create-election/create-election.component';
 import { BehaviourService } from '../services/behaviour.service';
+import { BackendService } from '../services/backend.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -31,17 +32,54 @@ export class DashboardComponent {
       ];
     })
   );
+  loading = true
   public orgName:any;
+  public userId:any;
+  public electionTray:any = [];
+  public error:any = ''
+  public selected:any = ''
 
-  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog, public behaviorService: BehaviourService) {}
+  constructor(private breakpointObserver: BreakpointObserver, public dialog: MatDialog, public behaviorService: BehaviourService, public backend: BackendService) {}
 
   ngOnInit(): void{
     this.behaviorService.user.subscribe((user:any)=>{
+      this.userId = user.user_id
       this.orgName = user.orgName
+    })
+    this.fetchElections()
+  }
+
+  fetchElections(): void{
+    this.loading = true
+    this.backend.fetchElection({userId: this.userId}).subscribe((res:any)=>{
+      this.electionTray = res.data
+      console.log(res.data)
+      this.loading = false
+      sessionStorage.getItem('selectedElection') !== null ? this.selected == JSON.parse(sessionStorage.getItem('selectedElection')!) : this.selected = ''
+    }, (err)=>{
+      if(err){
+        this.loading = false
+        this.error = 'Temporarily unable to fetch from the server'
+      }
     })
   }
 
   createElection(): void{
-    this.dialog.open(CreateElectionComponent, { width: '400px' })
+   const dialogRef = this.dialog.open(
+      CreateElectionComponent,
+      {
+        width: '400px',
+        closeOnNavigation: false,
+        disableClose: true
+      }
+    )
+    dialogRef.afterClosed().subscribe((res)=>{
+      this.fetchElections()
+    })
+  }
+
+  selectElection(title:any){
+    this.selected = title
+    sessionStorage.setItem('selectedElection', JSON.stringify(title))
   }
 }
