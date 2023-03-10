@@ -17,4 +17,12 @@ export class BackendService {
   login(value:any){
     return this.http.post(`${this.baseUrl}account/login`, value)
   }
+
+  createElection(value:any){
+    return this.http.post(`${this.baseUrl}election/create`, value)
+  }
+
+  fetchElection(userId:any){
+    return this.http.post(`${this.baseUrl}election/all`, userId)
+  }
 }
